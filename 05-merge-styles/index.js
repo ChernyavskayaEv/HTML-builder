@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 const folderPath = path.resolve(__dirname, 'styles');
 const fileStylesPath = path.resolve(__dirname, 'project-dist', 'bundle.css');
 
-const list = async () => {
+const writeInFile = async () => {
   try {
     const dirContent = await readdir(folderPath);
     dirContent.forEach(async item => {
@@ -20,8 +20,7 @@ const list = async () => {
         });
         const filePath = path.resolve(__dirname, 'styles', item);
         const readStyleFile = await readFile(filePath, { encoding: 'utf8' });
-        const writeInFile = await writeFile(fileStylesPath, readStyleFile, { flag: 'a' });
-
+       await writeFile(fileStylesPath, readStyleFile, { flag: 'a' });
       }
     })
   } catch (err) {
@@ -29,4 +28,4 @@ const list = async () => {
   }
 };
 
-await list();
+await writeInFile();
